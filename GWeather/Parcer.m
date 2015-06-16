@@ -33,6 +33,8 @@
     return self;
 }
 
+#pragma mark City list parcing
+
 - (void)parceCityList: (id<ParcerDelegate>)delegate
 {
     

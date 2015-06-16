@@ -26,6 +26,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+# pragma mark TableView Configuration
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (!cityListArrayMain) {
@@ -57,6 +60,8 @@
 }
 
 
+#pragma mark SearchBar Configuration
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     cityRequest = searchBar.text;
@@ -71,6 +76,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+#pragma mark Callbacks
 
 - (void) cityListRequestFinishedWithData: (NSMutableArray *) cityListArray
 {

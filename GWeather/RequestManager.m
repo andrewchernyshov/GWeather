@@ -13,6 +13,9 @@
 
 @implementation RequestManager
 
+#pragma mark General functions
+
+
 - (void) getCityListWithRequest:(NSString *)cityRequest
 {
     
@@ -20,6 +23,8 @@
     [downloadManager downloadCityListWithRequest:cityRequest :self];
     //downloadManager.delegate = self;
     }
+
+#pragma mark Callbacks
 
 - (void) downloadManagerFinishedCityListRequestWithData:(NSData *)data
 {
