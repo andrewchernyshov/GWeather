@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Coordinator.h"
-@interface SBViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface SBViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, CoordinatorDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *mySearchBar;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 

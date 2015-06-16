@@ -9,25 +9,19 @@
 #import "DownloadManager.h"
 @interface DownloadManager ()
 {
-    NSURL *_url;
+    NSString *codedRequest;
 }
 @end
 
 @implementation DownloadManager
 
--(id) initWithURL:(NSURL *)url
-{
-    self = [super init];
-    if (self) {
-        _url = url;
-    }
-    return self;
-}
 
-- (void) downloadCityList: (id<DownloadManagerDelegate>)delegate
+- (void) downloadCityListWithRequest:(NSString *)request :(id<DownloadManagerDelegate>)delegate
 {
+    codedRequest = [request stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://geocode-maps.yandex.ru/1.x/?format=json&geocode=%@", codedRequest]];
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionTask *cityRequestTask = [session dataTaskWithURL:_url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionTask *cityRequestTask = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [delegate downloadManagerFinishedCityListRequestWithData:data]; //теряет делегата при другой записи

@@ -14,10 +14,9 @@
 
 
 @interface DownloadManager : NSObject
-- (id) initWithURL: (NSURL *) url;
 @property (nonatomic, weak) id<DownloadManagerDelegate>delegate;
 
-- (void) downloadCityList: (id<DownloadManagerDelegate>)delegate;
+- (void) downloadCityListWithRequest: (NSString *)request : (id<DownloadManagerDelegate>)delegate;
 
 
 

@@ -10,21 +10,14 @@
 #import "DownloadManager.h"
 #import "Parcer.h"
 
-@interface RequestManager ()
-{
-    NSString *codedCityRequest;
-    
-}
-@end
 
 @implementation RequestManager
 
 - (void) getCityListWithRequest:(NSString *)cityRequest
 {
-    codedCityRequest = [cityRequest stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://geocode-maps.yandex.ru/1.x/?format=json&geocode=%@", codedCityRequest]];
-    DownloadManager *downloadManager = [[DownloadManager alloc] initWithURL:url];
-    [downloadManager downloadCityList:self];
+    
+    DownloadManager *downloadManager = [[DownloadManager alloc] init];
+    [downloadManager downloadCityListWithRequest:cityRequest :self];
     //downloadManager.delegate = self;
     }
 
