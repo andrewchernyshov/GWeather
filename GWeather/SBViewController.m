@@ -14,6 +14,7 @@
     NSMutableArray *cityListArrayDefault;
     NSMutableArray *cityListArrayMain;
     NSString *cityRequest;
+    WeatherRequest *forecastRequest;
 }
 @end
 
@@ -59,6 +60,21 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (!cityListArrayMain) {
+        forecastRequest = [cityListArrayDefault objectAtIndex:indexPath.row];
+    }
+    else{
+        forecastRequest = [cityListArrayMain objectAtIndex:indexPath.row];
+    }
+    [[Coordinator sharedInstance] getForecastWithRequest:forecastRequest];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
 
 #pragma mark SearchBar Configuration
 
@@ -68,6 +84,8 @@
     Coordinator *coordinator = [Coordinator sharedInstance];
     coordinator.delegate = self;
     [coordinator getCityListWithRequest:cityRequest];
+    
+  
     
 }
 
@@ -84,6 +102,7 @@
     cityListArrayMain = cityListArray;
     [_myTableView reloadData];
 }
+
 
 
 - (void)didReceiveMemoryWarning {

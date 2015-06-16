@@ -22,6 +22,8 @@
 }
 
 
+#pragma mark General functions
+
 - (void)getCityListWithRequest:(NSString *)request
 {
     RequestManager *requestManager = [[RequestManager alloc] init];
@@ -30,9 +32,23 @@
 
 }
 
+
+- (void) getForecastWithRequest:(WeatherRequest *)request
+{
+    RequestManager *requestManager = [[RequestManager alloc] init];
+    [requestManager getForecastWithRequest:request];
+}
+
+#pragma mark Callback
+
 - (void)requestManagerFinishedWithCityList:(NSMutableArray *)cityList
 {
     [self.delegate cityListRequestFinishedWithData:cityList];
+}
+
+- (void) requestManagerFinishedWithForecast:(WeatherObject *)dayForecast :(NSMutableArray *)threeDaysForecast
+{
+    [self.delegate forecastRequestFinishedWithData:dayForecast :threeDaysForecast];
 }
 
 @end

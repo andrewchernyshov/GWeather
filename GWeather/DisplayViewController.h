@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Coordinator.h"
 
-@interface DisplayViewController : UIViewController
+@interface DisplayViewController : UIViewController <CoordinatorDelegate>
 - (IBAction)addSBVCButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *regionLabel;

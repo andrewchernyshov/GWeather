@@ -38,4 +38,12 @@
     SBViewController *sbvc = [self.storyboard instantiateViewControllerWithIdentifier:@"SBViewController"];
     [self presentViewController:sbvc animated:YES completion:nil];
 }
+
+- (void)forecastRequestFinishedWithData:(WeatherObject *)todayForecast :(NSMutableArray *)threeDaysForecast
+{
+   
+    [_cityNameLabel setText:todayForecast.cityName];
+    [_regionLabel setText:todayForecast.region];
+}
+
 @end

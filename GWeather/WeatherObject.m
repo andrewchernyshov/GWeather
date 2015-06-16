@@ -9,5 +9,5 @@
 #import "WeatherObject.h"
 
 @implementation WeatherObject
-@synthesize cityName, region, coordinates;
+@synthesize cityName, region, coordinates, weekDay, weatherDiscription, currentTemperature, sunrise, sunset, humidityRate, windSpeed;
 @end
