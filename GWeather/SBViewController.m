@@ -71,6 +71,7 @@
     }
     [[Coordinator sharedInstance] getForecastWithRequest:forecastRequest];
     [self dismissViewControllerAnimated:YES completion:nil];
+    cityListArrayMain = nil;
 }
 
 
@@ -101,6 +102,7 @@
 - (void) cityListRequestFinishedWithData: (NSMutableArray *) cityListArray
 {
     cityListArrayMain = cityListArray;
+    NSLog(@"Data is in SBVC");
     [_myTableView reloadData];
     [_myActivityIndicator stopAnimating];
 }

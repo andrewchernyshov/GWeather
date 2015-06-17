@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *day3WindSpeedLabel;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *myActivityIndicatorDVC;
+- (IBAction)refreshForecast:(id)sender;
 
 
 @end

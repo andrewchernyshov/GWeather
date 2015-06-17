@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *myActivityIndicator;
 
+
+
 @property (nonatomic, weak) id<SBViewControllerDelegate>delegate;
 
 @end

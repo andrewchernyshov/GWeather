@@ -58,7 +58,7 @@
 
 - (void) requestManagerFinishedWithForecast:(WeatherObject *)dayForecast :(NSMutableArray *)threeDaysForecast
 {
-    
+    NSLog(@"Forecast city %@", dayForecast.cityName);
     [self.delegate forecastRequestFinishedWithData:dayForecast :threeDaysForecast];
 }
 

@@ -21,6 +21,12 @@
                                             <action selector="addSBVCButton:" destination="vXZ-lx-hvc" id="Skk-Da-rlZ"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="V08-Cb-wlJ"/>
+                                    <barButtonItem systemItem="refresh" id="6FN-OB-MFx">
+                                        <connections>
+                                            <action selector="refreshForecast:" destination="vXZ-lx-hvc" id="YHE-rb-Gtf"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZWY-0T-YDP">
