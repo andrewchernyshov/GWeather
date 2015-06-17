@@ -32,7 +32,8 @@
     currentRequest = forecastRequest;
     DownloadManager *downloadManager = [[DownloadManager alloc] init];
     [downloadManager download1DayForecastWithRequest:forecastRequest :self];
-    [downloadManager download3DaysForecastWithRequest:forecastRequest :self];
+    
+    //[downloadManager download3DaysForecastWithRequest:forecastRequest :self];
     
 }
 
@@ -52,6 +53,8 @@
 - (void) downloadManagerFinishedForecastDownloadFor1DayWithData:(NSData *)dayData
 {
     day1ForecastData = [[NSData alloc] initWithData:dayData];
+    DownloadManager *downloadManager = [[DownloadManager alloc] init];
+    [downloadManager download3DaysForecastWithRequest:currentRequest :self];
 }
 
 - (void) downloadManagerFinishedForecastDownloadFor3DaysWithData:(NSData *)threeDaysData

@@ -15,6 +15,9 @@
 @implementation DisplayViewController
 
 - (void)viewDidLoad {
+    
+    
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -45,6 +48,31 @@
 {
     [_cityNameLabel setText:dayForecast.cityName];
     [_regionLabel setText:dayForecast.region];
+    [_weekDayLabel setText:dayForecast.weekDay];
+    [_weatherDiscriptionLabel setText:dayForecast.weatherDiscription];
+    [_temperatureLabel setText:dayForecast.currentTemperature];
+    [_humidityLabel setText:dayForecast.humidityRate];
+    [_windSpeedLabel setText:dayForecast.windSpeed];
+    [_sunriseLabel setText:dayForecast.sunrise];
+    [_sunsetLabel setText:dayForecast.sunset];
+    
+    
+    [_day1WeekDayLabel setText:[[threeDaysForecast objectAtIndex:0]weekDay]];
+    [_day1TemperatureLabel setText:[[threeDaysForecast objectAtIndex:0] currentTemperature]];
+    [_day1WeatherDiscriptionLabel setText:[[threeDaysForecast objectAtIndex:0]weatherDiscription]];
+    [_day1WindSpeedLabel setText:[[threeDaysForecast objectAtIndex:0] windSpeed]];
+    
+    
+    [_day2WeekDayLabel setText:[[threeDaysForecast objectAtIndex:1]weekDay]];
+    [_day2TemperatureLabel setText:[[threeDaysForecast objectAtIndex:1] currentTemperature]];
+    [_day2WeatherDiscriptionLabel setText:[[threeDaysForecast objectAtIndex:1]weatherDiscription]];
+    [_day2WindSpeedLabel setText:[[threeDaysForecast objectAtIndex:1]windSpeed]];
+    
+    [_day3WeekDayLabel setText:[[threeDaysForecast objectAtIndex:2]weekDay]];
+    [_day3TemperatureLabel setText:[[threeDaysForecast objectAtIndex:2] currentTemperature]];
+    [_day3WeatherDiscriptionLabel setText:[[threeDaysForecast objectAtIndex:2]weatherDiscription]];
+    [_day3WindSpeedLabel setText:[[threeDaysForecast objectAtIndex:2]windSpeed]];
+   
     
 }
 

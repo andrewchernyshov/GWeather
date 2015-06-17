@@ -189,7 +189,7 @@
     windSpeedFinalArray = [[NSMutableArray alloc] init];
     weatherDiscriptionFinalArray = [[NSMutableArray alloc] init];
     tempFinalArray = [[NSMutableArray alloc] init];
-    
+    dateFormatter = [[NSDateFormatter alloc] init];
     weekdayArray = [[NSMutableArray alloc] init];
     windSpeedArray = [[NSMutableArray alloc] init];
     tempData = [[NSMutableArray alloc] init];
@@ -252,6 +252,14 @@
     
     
     
+    NSString *day1 = [weekdayArray objectAtIndex:1];
+    curDay = [day1 intValue];
+    NSString *day2 = [weekdayArray objectAtIndex:2];
+    curDay1 = [day2 intValue];
+    NSString *day3 = [weekdayArray objectAtIndex:3];
+    curDay2 = [day3 intValue];
+        
+    
     [dateFormatter setDateFormat:@"EEE"];
     NSDate *currentDate = [NSDate dateWithTimeIntervalSince1970:curDay];
     NSDate *currentDate1 = [NSDate dateWithTimeIntervalSince1970:curDay1];
@@ -273,12 +281,7 @@
     [windSpeedFinalArray addObject:day2WindSpeed];
     [windSpeedFinalArray addObject:day3WindSpeed];
     
-    NSString *day1 = [weekdayArray objectAtIndex:1];
-    curDay = [day1 intValue];
-    NSString *day2 = [weekdayArray objectAtIndex:2];
-    curDay1 = [day2 intValue];
-    NSString *day3 = [weekdayArray objectAtIndex:3];
-    curDay2 = [day3 intValue];
+   
     
     
     NSString *weatherDiscrFinal = [discriptionArray objectAtIndex:1];
