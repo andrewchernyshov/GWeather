@@ -41,6 +41,14 @@
     SBViewController *sbvc = [self.storyboard instantiateViewControllerWithIdentifier:@"SBViewController"];
     [self presentViewController:sbvc animated:YES completion:nil];
     sbvc.delegate = self;
+    [_myActivityIndicatorDVC startAnimating];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAnimating:) name:@"stopAnimating" object:sbvc];
+}
+
+
+- (void) stopAnimating: (NSNotification *) notification
+{
+    [_myActivityIndicatorDVC stopAnimating];
 }
 
 
@@ -73,7 +81,7 @@
     [_day3WeatherDiscriptionLabel setText:[[threeDaysForecast objectAtIndex:2]weatherDiscription]];
     [_day3WindSpeedLabel setText:[[threeDaysForecast objectAtIndex:2]windSpeed]];
    
-    
+    [_myActivityIndicatorDVC stopAnimating];
 }
 
 

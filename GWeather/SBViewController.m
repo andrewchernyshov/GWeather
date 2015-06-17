@@ -85,7 +85,7 @@
     Coordinator *coordinator = [Coordinator sharedInstance];
     coordinator.delegate = self;
     [coordinator getCityListWithRequest:cityRequest];
-    
+    [_myActivityIndicator startAnimating];
   
     
 }
@@ -93,7 +93,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAnimating" object:nil];
 }
 
 #pragma mark Callbacks
@@ -102,6 +102,7 @@
 {
     cityListArrayMain = cityListArray;
     [_myTableView reloadData];
+    [_myActivityIndicator stopAnimating];
 }
 
 
@@ -110,6 +111,7 @@
 {
     [self.delegate sbFinishedWithDayForecast:todayForecast withThreeDayForecast:threeDaysForecast];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 

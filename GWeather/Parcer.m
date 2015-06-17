@@ -301,7 +301,7 @@
         [weatherObject setCurrentTemperature:[tempFinalArray objectAtIndex:i]];
         [weatherObject setWindSpeed:[windSpeedFinalArray objectAtIndex:i]];
         [weatherObject setWeatherDiscription:[weatherDiscriptionFinalArray objectAtIndex:i]];
-        NSLog(@"i = %d", i);
+        
         [weatherForecastObjectArray addObject:weatherObject];
     }
     

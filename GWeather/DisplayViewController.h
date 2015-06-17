@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *day3WeatherDiscriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *day3WindSpeedLabel;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *myActivityIndicatorDVC;
 
 
 @end

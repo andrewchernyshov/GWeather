@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *mySearchBar;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *myActivityIndicator;
 
 @property (nonatomic, weak) id<SBViewControllerDelegate>delegate;
 

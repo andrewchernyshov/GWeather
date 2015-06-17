@@ -72,6 +72,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f15-LL-sFy">
+                                <rect key="frame" x="251" y="432" width="49" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discription" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3ft-Xk-arv">
                                 <rect key="frame" x="121" y="432" width="122" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -163,13 +170,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f15-LL-sFy">
-                                <rect key="frame" x="251" y="432" width="49" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="sRB-xg-rVL">
+                                <rect key="frame" x="142" y="244" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -188,6 +193,7 @@
                         <outlet property="day3WeekDayLabel" destination="eW0-tC-gsN" id="VTM-8d-1bj"/>
                         <outlet property="day3WindSpeedLabel" destination="hAv-J2-2MV" id="TiT-zv-DKT"/>
                         <outlet property="humidityLabel" destination="g7Z-bh-gIO" id="QNg-aC-tNL"/>
+                        <outlet property="myActivityIndicatorDVC" destination="sRB-xg-rVL" id="VwU-3G-iSF"/>
                         <outlet property="regionLabel" destination="4lJ-Sh-jhA" id="oJJ-8F-eX0"/>
                         <outlet property="sunriseLabel" destination="5gt-bB-KRb" id="p41-sa-ApC"/>
                         <outlet property="sunsetLabel" destination="uDV-c8-ErD" id="9Ho-9w-Bn4"/>
@@ -250,11 +256,17 @@
                                     <outlet property="delegate" destination="lei-D4-aqs" id="XTD-WU-JyF"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="Oin-FD-pCe">
+                                <rect key="frame" x="16" y="266" width="288" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
                     <connections>
+                        <outlet property="myActivityIndicator" destination="Oin-FD-pCe" id="FPF-Wd-fCw"/>
                         <outlet property="mySearchBar" destination="uvt-0O-50c" id="sEF-Sh-qMa"/>
                         <outlet property="myTableView" destination="cI2-8v-pHC" id="aGs-2C-FDf"/>
                     </connections>
