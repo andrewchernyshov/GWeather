@@ -21,6 +21,15 @@
     return _sharedInstance;
 }
 
+- (id) init
+{
+    self = [super init];
+    if (self) {
+        NSLog(@"Coordinator created");
+        
+    }
+    return self;
+}
 
 #pragma mark General functions
 
@@ -36,7 +45,8 @@
 - (void) getForecastWithRequest:(WeatherRequest *)request
 {
     RequestManager *requestManager = [[RequestManager alloc] init];
-    [requestManager getForecastWithRequest:request];
+    requestManager.delegate = self;
+    [requestManager getForecastWithRequest:request :self];
 }
 
 #pragma mark Callback
@@ -48,6 +58,7 @@
 
 - (void) requestManagerFinishedWithForecast:(WeatherObject *)dayForecast :(NSMutableArray *)threeDaysForecast
 {
+    
     [self.delegate forecastRequestFinishedWithData:dayForecast :threeDaysForecast];
 }
 

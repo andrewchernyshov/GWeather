@@ -12,14 +12,15 @@
 @protocol ParcerDelegate
 
 - (void) parcerFinishedCityListParcingWithData: (NSMutableArray *) data;
-- (void) parcerFinishedForecastParcingWitgData: (WeatherObject *)todayForecast :(NSMutableArray *)threeDayForecast;
+- (void) parcerFinishedForecastParcingWitgData: (WeatherObject *)todayForecast :(NSMutableArray *) threeDaysForecast;
+;
 @end
 
 @interface Parcer : NSObject
 
 - (id) initWithCityList: (NSData *)cityList dayForecast: (NSData *)dayForecast : (NSData *) threeDaysForecast : (WeatherRequest *)currentWeatherRequest;
 - (void) parceCityList: (id<ParcerDelegate>)delegate;
-- (void) parceForecast: (id<ParcerDelegate>)delegate;
-
+- (void) parce1DayForecast;
+- (void) parce3DayForecast: (id<ParcerDelegate>)delegate;
 @property (nonatomic, weak) id <ParcerDelegate> delegate;
 @end

@@ -9,6 +9,7 @@
 #import "SBViewController.h"
 #import "WeatherRequest.h"
 #import "Coordinator.h"
+#import "DisplayViewController.h"
 @interface SBViewController ()
 {
     NSMutableArray *cityListArrayDefault;

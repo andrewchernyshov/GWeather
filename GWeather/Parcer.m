@@ -10,6 +10,8 @@
 #import "WeatherObject.h"
 @interface Parcer ()
 {
+    WeatherObject *currentWeatherForecast;
+    
     NSData *_cityList;
     NSData *_dayForecast;
     NSData *_threeDaysForecast;
@@ -28,6 +30,7 @@
     NSMutableArray *tempData;
     NSMutableArray *discriptionArray;
     NSNumberFormatter *numberFormatter;
+    NSDateFormatter *dateFormatter;
     NSMutableArray *weatherForecastObjectArray;
     int curDay;
     int curDay1;
@@ -61,6 +64,7 @@
 - (void)parceCityList: (id<ParcerDelegate>)delegate
 {
     
+    
     if (_cityList) {
         NSDictionary *cityListDictionary = [NSJSONSerialization JSONObjectWithData:_cityList options:0 error:nil];
         NSDictionary *responseDictionary = [cityListDictionary objectForKey:@"response"];
@@ -90,10 +94,13 @@
     }
 }
 
-- (void) parceForecast:(id<ParcerDelegate>)delegate
+- (void) parce1DayForecast
 {
 
-    _delegate = delegate;
+    if (!_dayForecast) {
+        NSLog(@"1 Day forecast parcer did not receive data");
+    }
+    
 #pragma mark 1 day forecast parcing
     
     NSDictionary *allDataDictionary1 = [NSJSONSerialization JSONObjectWithData:_dayForecast options:0 error:nil];
@@ -110,7 +117,7 @@
     
     NSString *sunrise = [sysDictionary objectForKey:@"sunrise"];
     int sunriseInt = [sunrise intValue];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     NSDate *sunriseDate = [NSDate dateWithTimeIntervalSince1970:sunriseInt];
     NSString *sunriseFinal = [dateFormatter stringFromDate:sunriseDate];
@@ -163,9 +170,20 @@
     [todayForecast setWeatherDiscription:[discriptionWeatherArray objectAtIndex:0]];
     [todayForecast setCityName:_forecastRequest.cityName];
     [todayForecast setRegion:_forecastRequest.region];
+    [todayForecast setCoordinates:_forecastRequest.coordinates];
     
+    currentWeatherForecast = [[WeatherObject alloc] init];
+    currentWeatherForecast = todayForecast;
     
+}
 #pragma mark 3 days forecast parcing
+
+- (void)parce3DayForecast:(id<ParcerDelegate>)delegate
+{
+    if (!_threeDaysForecast) {
+        NSLog(@"3 Day's forecast parcer did not receive data");
+    }
+
     
     weekdayFinalArray = [[NSMutableArray alloc] init];
     windSpeedFinalArray = [[NSMutableArray alloc] init];
@@ -285,7 +303,7 @@
     }
     
     
-    [self.delegate parcerFinishedForecastParcingWitgData:todayForecast :weatherForecastObjectArray];
+    [delegate parcerFinishedForecastParcingWitgData:currentWeatherForecast :weatherForecastObjectArray];
     
 
 }

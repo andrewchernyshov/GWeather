@@ -41,9 +41,11 @@
 
 - (void)forecastRequestFinishedWithData:(WeatherObject *)todayForecast :(NSMutableArray *)threeDaysForecast
 {
+   dispatch_async(dispatch_get_main_queue(), ^{
+       [_cityNameLabel setText:todayForecast.cityName];
+       [_regionLabel setText:todayForecast.region];
+   });
    
-    [_cityNameLabel setText:todayForecast.cityName];
-    [_regionLabel setText:todayForecast.region];
 }
 
 @end

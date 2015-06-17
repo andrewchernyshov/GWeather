@@ -15,21 +15,25 @@
 #pragma mark General functions
 {
     WeatherRequest *currentRequest;
+    NSData *day1ForecastData;
+    
 }
 
-- (void) getCityListWithRequest:(NSString *)cityRequest
+- (void) getCityListWithRequest:(NSString *)cityRequest 
 {
     
     DownloadManager *downloadManager = [[DownloadManager alloc] init];
     [downloadManager downloadCityListWithRequest:cityRequest :self];
-    //downloadManager.delegate = self;
+    
     }
 
-- (void) getForecastWithRequest:(WeatherRequest *)forecastRequest
+- (void) getForecastWithRequest:(WeatherRequest *)forecastRequest :(id<RequestManagerDelegate>)delegate
 {
     currentRequest = forecastRequest;
     DownloadManager *downloadManager = [[DownloadManager alloc] init];
-    [downloadManager downloadForecastWithRequest:forecastRequest :self];
+    [downloadManager download1DayForecastWithRequest:forecastRequest :self];
+    [downloadManager download3DaysForecastWithRequest:forecastRequest :self];
+    
 }
 
 #pragma mark Callbacks
@@ -45,16 +49,39 @@
     [_delegate requestManagerFinishedWithCityList:data];
 }
 
-- (void) downloadManagerFinishedForecastDownloadWithData:(NSData *)dayData :(NSData *)threeDaysData
+- (void) downloadManagerFinishedForecastDownloadFor1DayWithData:(NSData *)dayData
 {
-    Parcer *parcer = [[Parcer alloc] initWithCityList:nil dayForecast:dayData :threeDaysData :currentRequest];
-    [parcer parceForecast:self];
+    day1ForecastData = [[NSData alloc] initWithData:dayData];
 }
 
-- (void) parcerFinishedForecastParcingWitgData:(WeatherObject *)todayForecast :(NSMutableArray *)threeDayForecast
+- (void) downloadManagerFinishedForecastDownloadFor3DaysWithData:(NSData *)threeDaysData
 {
-    
-    [self.delegate requestManagerFinishedWithForecast:todayForecast :threeDayForecast];
+    Parcer *parcer = [[Parcer alloc] initWithCityList:nil dayForecast:day1ForecastData :threeDaysData :currentRequest ];
+    [parcer parce1DayForecast];
+    [parcer parce3DayForecast:self];
 }
 
+
+- (void) parcerFinishedForecastParcingWitgData:(WeatherObject *)todayForecast :(NSMutableArray *)threeDaysForecast
+{
+    [self.delegate requestManagerFinishedWithForecast:todayForecast :threeDaysForecast];
+    [_delegate requestManagerFinishedWithForecast:todayForecast :threeDaysForecast];
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

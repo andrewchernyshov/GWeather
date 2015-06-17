@@ -10,7 +10,7 @@
 #import "RequestManager.h"
 #import "WeatherRequest.h"
 #import "WeatherObject.h"
-@protocol CoordinatorDelegate
+@protocol CoordinatorDelegate //<NSObject>
 @optional
 - (void) cityListRequestFinishedWithData: (NSMutableArray *) cityListArray;
 - (void) forecastRequestFinishedWithData: (WeatherObject *)todayForecast :(NSMutableArray *)threeDaysForecast;

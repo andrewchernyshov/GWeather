@@ -10,7 +10,8 @@
 #import "WeatherRequest.h"
 @protocol DownloadManagerDelegate
 - (void) downloadManagerFinishedCityListRequestWithData: (NSData *)data;
-- (void) downloadManagerFinishedForecastDownloadWithData: (NSData *)dayData :(NSData *)threeDaysData;
+- (void) downloadManagerFinishedForecastDownloadFor1DayWithData: (NSData *)dayData;
+- (void) downloadManagerFinishedForecastDownloadFor3DaysWithData: (NSData *)threeDaysData;
 @end
 
 
@@ -20,6 +21,8 @@
 
 - (void) downloadCityListWithRequest: (NSString *)request : (id<DownloadManagerDelegate>)delegate;
 
-- (void) downloadForecastWithRequest: (WeatherRequest *)request :(id<DownloadManagerDelegate>)delegate;
+- (void) download1DayForecastWithRequest: (WeatherRequest *)request :(id<DownloadManagerDelegate>)delegate;
+
+- (void) download3DaysForecastWithRequest: (WeatherRequest *)request :(id<DownloadManagerDelegate>)delegate;
 
 @end

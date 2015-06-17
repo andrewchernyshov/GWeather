@@ -23,6 +23,6 @@
 
 @property (nonatomic, weak) id<RequestManagerDelegate>delegate;
 - (void) getCityListWithRequest: (NSString *)cityRequest;
-- (void) getForecastWithRequest: (WeatherRequest *)forecastRequest;
+- (void) getForecastWithRequest: (WeatherRequest *)forecastRequest :(id<RequestManagerDelegate>)delegate;
 
 @end
