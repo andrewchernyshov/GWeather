@@ -50,10 +50,11 @@
     NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
+             NSLog(@"Day 1 forecast downloaded data %@", data);
             [delegate downloadManagerFinishedForecastDownloadFor1DayWithData:data];
-            if (!data) {
-                NSLog(@"Day 1 forecast download failed");
-            }
+            
+            
+            
             
         });
         
@@ -71,9 +72,7 @@
     NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (!data) {
-                NSLog(@"3 days forecast download failed");
-            }
+            NSLog(@"3Day forecast downloaded data %@", data);
             [delegate downloadManagerFinishedForecastDownloadFor3DaysWithData:data];
             
         });

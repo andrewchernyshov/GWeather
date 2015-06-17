@@ -7,7 +7,7 @@
 //
 
 #import "DisplayViewController.h"
-#import "SBViewController.h"
+
 @interface DisplayViewController ()
 
 @end
@@ -37,15 +37,16 @@
 - (IBAction)addSBVCButton:(id)sender {
     SBViewController *sbvc = [self.storyboard instantiateViewControllerWithIdentifier:@"SBViewController"];
     [self presentViewController:sbvc animated:YES completion:nil];
+    sbvc.delegate = self;
 }
 
-- (void)forecastRequestFinishedWithData:(WeatherObject *)todayForecast :(NSMutableArray *)threeDaysForecast
+
+- (void) sbFinishedWithDayForecast:(WeatherObject *)dayForecast withThreeDayForecast:(NSMutableArray *)threeDaysForecast
 {
-   dispatch_async(dispatch_get_main_queue(), ^{
-       [_cityNameLabel setText:todayForecast.cityName];
-       [_regionLabel setText:todayForecast.region];
-   });
-   
+    [_cityNameLabel setText:dayForecast.cityName];
+    [_regionLabel setText:dayForecast.region];
+    
 }
+
 
 @end
