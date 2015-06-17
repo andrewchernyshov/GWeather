@@ -33,7 +33,7 @@
     DownloadManager *downloadManager = [[DownloadManager alloc] init];
     [downloadManager download1DayForecastWithRequest:forecastRequest :self];
     
-    //[downloadManager download3DaysForecastWithRequest:forecastRequest :self];
+    
     
 }
 

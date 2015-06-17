@@ -101,80 +101,81 @@
 {
     
     
-    
-#pragma mark 1 day forecast parcing
-    
-    NSDictionary *allDataDictionary1 = [NSJSONSerialization JSONObjectWithData:_dayForecast options:0 error:nil];
+        
     
     
-    discriptionWeatherArray = [[NSMutableArray alloc] init];
-    NSArray *weatherArray = [allDataDictionary1 objectForKey:@"weather"];
-    for (NSDictionary *dict1 in weatherArray) {
-        NSString *weatherDiscription = [dict1 objectForKey:@"description"];
-        [discriptionWeatherArray addObject:weatherDiscription];
-    }
+        NSDictionary *allDataDictionary1 = [NSJSONSerialization JSONObjectWithData:_dayForecast options:0 error:nil];
+        discriptionWeatherArray = [[NSMutableArray alloc] init];
+        NSArray *weatherArray = [allDataDictionary1 objectForKey:@"weather"];
+        for (NSDictionary *dict1 in weatherArray) {
+            NSString *weatherDiscription = [dict1 objectForKey:@"description"];
+            [discriptionWeatherArray addObject:weatherDiscription];
+        }
+        
+        NSDictionary *sysDictionary = [allDataDictionary1 objectForKey:@"sys"];
+        
+        NSString *sunrise = [sysDictionary objectForKey:@"sunrise"];
+        int sunriseInt = [sunrise intValue];
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"HH:mm"];
+        NSDate *sunriseDate = [NSDate dateWithTimeIntervalSince1970:sunriseInt];
+        NSString *sunriseFinal = [dateFormatter stringFromDate:sunriseDate];
+        
+        NSString *sunset = [sysDictionary objectForKey:@"sunset"];
+        int sunsetInt = [sunset intValue];
+        
+        NSDate *sunsetDate = [NSDate dateWithTimeIntervalSince1970:sunsetInt];
+        NSString *sunsetFinal = [dateFormatter stringFromDate:sunsetDate];
+        
+        NSDate *CurrentDate = [NSDate date];
+        
+        [dateFormatter setDateFormat:@"EEEE"];
+        NSString *weekDay = [dateFormatter stringFromDate:CurrentDate];
+        
+        
+        NSDictionary *mainDictionary = [allDataDictionary1 objectForKey:@"main"];
+        
+        NSString *currentTemperature = [mainDictionary objectForKey:@"temp"];
+        NSNumber *temp = [NSNumber numberWithDouble:[currentTemperature doubleValue]- 273]; //NSNumberFormatter
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
+        [numberFormatter setMaximumFractionDigits:0];
+        NSString *tempFormated = [numberFormatter stringFromNumber:temp];
+        
+        
+        
+        NSDictionary *windDictionary = [allDataDictionary1 objectForKey:@"wind"];
+        NSNumber *windSpeed = [windDictionary objectForKey:@"speed"];
+        NSString *windSpeedFinal = [numberFormatter stringFromNumber:windSpeed];
+        
+        
+        
+        NSNumber *humidityRate = [mainDictionary objectForKey:@"humidity"];
+        
+        [numberFormatter setMultiplier:@1];
+        [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+        NSString *humidityFinal = [numberFormatter stringFromNumber:humidityRate];
     
-    NSDictionary *sysDictionary = [allDataDictionary1 objectForKey:@"sys"];
+            todayForecast = [[WeatherObject alloc] init];
+            [todayForecast setSunrise:sunriseFinal];
+            [todayForecast setSunset:sunsetFinal];
+            [todayForecast setWeekDay:weekDay];
+            [todayForecast setCurrentTemperature:tempFormated];
+            [todayForecast setWindSpeed:windSpeedFinal];
+            [todayForecast setHumidityRate:humidityFinal];
+            [todayForecast setWeatherDiscription:[discriptionWeatherArray objectAtIndex:0]];
+            [todayForecast setCityName:_forecastRequest.cityName];
+            [todayForecast setRegion:_forecastRequest.region];
+            [todayForecast setCoordinates:_forecastRequest.coordinates];
+            
+            
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        currentWeatherForecast = [[WeatherObject alloc] init];
+        currentWeatherForecast = todayForecast;
+    });
     
-    NSString *sunrise = [sysDictionary objectForKey:@"sunrise"];
-    int sunriseInt = [sunrise intValue];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSDate *sunriseDate = [NSDate dateWithTimeIntervalSince1970:sunriseInt];
-    NSString *sunriseFinal = [dateFormatter stringFromDate:sunriseDate];
-    
-    NSString *sunset = [sysDictionary objectForKey:@"sunset"];
-    int sunsetInt = [sunset intValue];
-    
-    NSDate *sunsetDate = [NSDate dateWithTimeIntervalSince1970:sunsetInt];
-    NSString *sunsetFinal = [dateFormatter stringFromDate:sunsetDate];
-    
-    NSDate *CurrentDate = [NSDate date];
-    
-    [dateFormatter setDateFormat:@"EEEE"];
-    NSString *weekDay = [dateFormatter stringFromDate:CurrentDate];
-    
-    
-    NSDictionary *mainDictionary = [allDataDictionary1 objectForKey:@"main"];
-    
-    NSString *currentTemperature = [mainDictionary objectForKey:@"temp"];
-    NSNumber *temp = [NSNumber numberWithDouble:[currentTemperature doubleValue]- 273]; //NSNumberFormatter
-    numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
-    [numberFormatter setMaximumFractionDigits:0];
-    NSString *tempFormated = [numberFormatter stringFromNumber:temp];
-    
-    
-    
-    NSDictionary *windDictionary = [allDataDictionary1 objectForKey:@"wind"];
-    NSNumber *windSpeed = [windDictionary objectForKey:@"speed"];
-    NSString *windSpeedFinal = [numberFormatter stringFromNumber:windSpeed];
-    
-    
-    
-    NSNumber *humidityRate = [mainDictionary objectForKey:@"humidity"];
-    
-    [numberFormatter setMultiplier:@1];
-    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-    NSString *humidityFinal = [numberFormatter stringFromNumber:humidityRate];
-    
-    
-    
-    todayForecast = [[WeatherObject alloc] init];
-    [todayForecast setSunrise:sunriseFinal];
-    [todayForecast setSunset:sunsetFinal];
-    [todayForecast setWeekDay:weekDay];
-    [todayForecast setCurrentTemperature:tempFormated];
-    [todayForecast setWindSpeed:windSpeedFinal];
-    [todayForecast setHumidityRate:humidityFinal];
-    [todayForecast setWeatherDiscription:[discriptionWeatherArray objectAtIndex:0]];
-    [todayForecast setCityName:_forecastRequest.cityName];
-    [todayForecast setRegion:_forecastRequest.region];
-    [todayForecast setCoordinates:_forecastRequest.coordinates];
-    
-    currentWeatherForecast = [[WeatherObject alloc] init];
-    currentWeatherForecast = todayForecast;
     
 }
 #pragma mark 3 days forecast parcing
@@ -198,11 +199,9 @@
     weatherForecastObjectArray = [[NSMutableArray alloc] init];
     
     
-    dispatch_queue_t parcerQueue;
-    parcerQueue = dispatch_queue_create("parceThread", NULL);
-    dispatch_async(parcerQueue, ^{
-        
-        
+
+    
+    
         
         NSDictionary *allDataDictionary = [NSJSONSerialization JSONObjectWithData:_threeDaysForecast options:0 error:nil];
         NSArray *arrayOfList = [allDataDictionary objectForKey:@"list"];
@@ -315,7 +314,10 @@
             
         });
         
-    });
+
+    
+
+    
 }
 
 
